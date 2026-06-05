@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>База Знаний & Поддержка</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        /* Стильный темный интерфейс в тему Telegram */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #182533;
+            color: #ffffff;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h2 {
+            color: #64b5f6;
+            margin-bottom: 10px;
+            font-size: 22px;
+        }
+
+        p {
+            color: #708499;
+            font-size: 14px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        /* Контейнер для кнопок-вопросов */
+        .faq-container {
+            width: 100%;
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        /* Стиль интерактивных кнопок */
+        .faq-card {
+            background-color: #223141;
+            border: 1px solid #2b394a;
+            border-radius: 12px;
+            padding: 15px;
+            text-align: left;
+            font-size: 15px;
+            color: #ffffff;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
+        }
+
+        .faq-card:hover {
+            background-color: #2b394a;
+        }
+
+        .faq-card:active {
+            transform: scale(0.98);
+        }
+
+        .faq-icon {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>📖 База знаний CRM</h2>
+    <p>Выберите интересующий вас частый вопрос, чтобы мгновенно отправить его нашей поддержке:</p>
+
+    <div class="faq-container">
+        <div class="faq-card" onclick="sendQuestion('💰 Вопрос по поводу оплаты заказа')">
+            <span class="faq-icon">💰</span> Как оплатить заказ в магазине?
+        </div>
+        
+        <div class="faq-card" onclick="sendQuestion('📦 Вопрос по поводу сроков доставки')">
+            <span class="faq-icon">📦</span> Какие сроки и стоимость доставки?
+        </div>
+        
+        <div class="faq-card" onclick="sendQuestion('🔄 Запрос на возврат товара')">
+            <span class="faq-icon">🔄</span> Можно ли вернуть или обменять товар?
+        </div>
+        
+        <div class="faq-card" onclick="sendQuestion('🧑‍💻 Связаться с живым оператором')">
+            <span class="faq-icon">🧑‍💻</span> У меня другой вопрос / Позовите менеджера
+        </div>
+    </div>
+
+    <script>
+        // Инициализируем Telegram Web App
+        const tg = window.Telegram.WebApp;
+        
+        // Расширяем окно на максимум сразу после открытия
+        tg.expand();
+
+        // Функция отправки данных обратно в нашего бота
+        function sendQuestion(questionText) {
+            // Передаем текст кнопки боту
+            tg.sendData(questionText);
+            
+            // Закрываем Web App окно
+            tg.close();
+        }
+    </script>
+</body>
+</html>
