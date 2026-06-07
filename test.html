@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEST</title>
+    <style>
+        body { background: #000; color: #0f0; font-family: monospace; padding: 20px; text-align: center; }
+        button { padding: 20px 40px; font-size: 20px; margin: 10px; background: #333; color: #fff; border: 2px solid #0f0; cursor: pointer; border-radius: 10px; }
+        button:active { background: #0f0; color: #000; }
+        .box { border: 1px solid #0f0; padding: 20px; margin: 20px 0; border-radius: 10px; }
+    </style>
+</head>
+<body>
+    <h1>🧪 ТЕСТ РАБОТОСПОСОБНОСТИ</h1>
+    <p id="status">Если вы это видите - GitHub Pages работает!</p>
+    
+    <div class="box">
+        <p>Кнопки ниже должны работать:</p>
+        <button onclick="document.getElementById('result').textContent = 'КНОПКА 1 НАЖАТА! ✅'">КНОПКА 1</button>
+        <button onclick="document.getElementById('result').textContent = 'КНОПКА 2 НАЖАТА! ✅'">КНОПКА 2</button>
+        <button onclick="testAPI()">ПРОВЕРИТЬ API</button>
+    </div>
+    
+    <div class="box" id="result" style="font-size: 24px; min-height: 50px;">
+        Нажмите на кнопку
+    </div>
+    
+    <div class="box" id="apiResult">
+        API: не проверено
+    </div>
+
+    <script>
+        document.getElementById('status').textContent += '\nJavaScript работает!';
+        
+        async function testAPI() {
+            document.getElementById('apiResult').textContent = 'Загрузка...';
+            try {
+                const r = await fetch('https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT');
+                const d = await r.json();
+                document.getElementById('apiResult').innerHTML = '✅ API работает!<br>BTC = $' + parseFloat(d.price).toFixed(2);
+            } catch(e) {
+                document.getElementById('apiResult').innerHTML = '❌ API ошибка: ' + e.message;
+            }
+        }
+    </script>
+</body>
+</html>
